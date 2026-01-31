@@ -14,19 +14,34 @@ class TCG_SAN_Repository {
         $this->table = $wpdb->prefix . 'tcg_admin_notes';
     }
 
-    public function paginate($per_page, $offset) {
-        global $wpdb;
+    public function paginate($per_page, $offset, $search = null) {
+    global $wpdb;
 
-        return $wpdb->get_results(
-            $wpdb->prepare(
-                "SELECT * FROM {$this->table}
-                 ORDER BY created_at DESC
-                 LIMIT %d OFFSET %d",
-                $per_page,
-                $offset
-            )
-        );
+    $where = '';
+    $params = [];
+
+    if ($search) {
+        $where = "WHERE title LIKE %s OR note LIKE %s";
+        $like = '%' . $wpdb->esc_like($search) . '%';
+        $params[] = $like;
+        $params[] = $like;
     }
+
+    $sql = "
+        SELECT * FROM {$this->table}
+        $where
+        ORDER BY created_at DESC
+        LIMIT %d OFFSET %d
+    ";
+
+    $params[] = $per_page;
+    $params[] = $offset;
+
+    return $wpdb->get_results(
+        $wpdb->prepare($sql, ...$params)
+    );
+}
+
 
     public function count() {
         global $wpdb;
@@ -68,3 +83,4 @@ class TCG_SAN_Repository {
         return $wpdb->delete($this->table, ['id' => $id]);
     }
 }
+
