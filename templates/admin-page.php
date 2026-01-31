@@ -31,8 +31,12 @@
 
     <hr>
 
-    <form id="tcg-san-search">
-        <input type="search" name="search" placeholder="Search notes..." />
+    <form method="get" action="<?php echo esc_url(admin_url('admin.php')); ?>">
+        <input type="hidden" name="page" value="tcg-admin-notes">
+    
+        <input type="search" name="search" value="<?php echo esc_attr($_GET['search'] ?? ''); ?>" placeholder="Search notes...">
+    
+        <button class="button">Search</button>
     </form>
 
     <table class="widefat striped">
@@ -78,6 +82,7 @@
         </tbody>
     </table>
 </div>
+
 
 
 
