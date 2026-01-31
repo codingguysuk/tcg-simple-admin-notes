@@ -114,6 +114,17 @@ Authentication is handled via WordPress nonces when used within the admin area.
 
 ---
 
+## Experimental Features (In Progress)
+
+- Search and filtering
+- Inline editing
+- Improved admin UX
+
+These features are under active development in a feature branch and not yet part of the stable release.
+
+---
+
 ## 📄 License
+
 
 GPL-2.0-or-later
