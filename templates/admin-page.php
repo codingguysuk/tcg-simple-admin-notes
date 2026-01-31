@@ -58,6 +58,8 @@
                 <td class="tcg-edit-note" contenteditable="true" spellcheck="true">
                     <?= esc_html($note->note); ?>
                 </td>
+
+                <td><?php echo esc_html($note->created_at); ?></td>
             
                 <!-- Actions column -->
                 <td>
@@ -76,5 +78,6 @@
         </tbody>
     </table>
 </div>
+
 
 
