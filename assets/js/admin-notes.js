@@ -27,6 +27,32 @@ document.addEventListener('submit', async (e) => {
 });
 
 document.addEventListener('click', async (e) => {
+    if (!e.target.matches('.tcg-save-inline')) return;
+
+    const row = e.target.closest('tr');
+
+    const data = {
+        title: row.querySelector('.tcg-edit-title').innerText,
+        note:  row.querySelector('.tcg-edit-note').innerText
+    };
+
+    await fetch(
+        TCG_SAN.api + 'notes/' + row.dataset.id,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-WP-Nonce': TCG_SAN.nonce
+            },
+            body: JSON.stringify(data)
+        }
+    );
+
+    alert('Saved');
+});
+
+
+document.addEventListener('click', async (e) => {
     if (!e.target.matches('.tcg-delete')) return;
 
     e.preventDefault();
@@ -44,3 +70,4 @@ document.addEventListener('click', async (e) => {
 
     location.reload();
 });
+

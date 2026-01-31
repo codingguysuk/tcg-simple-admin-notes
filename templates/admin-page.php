@@ -31,6 +31,10 @@
 
     <hr>
 
+    <form id="tcg-san-search">
+        <input type="search" name="search" placeholder="Search notes..." />
+    </form>
+
     <table class="widefat striped">
         <thead>
             <tr>
@@ -42,16 +46,38 @@
         </thead>
         <tbody>
         <?php foreach ($notes as $note) : ?>
-            <tr>
-                <td><?php echo esc_html($note->title); ?></td>
-                <td><?php echo wp_kses_post(wp_trim_words($note->note, 20)); ?></td>
-                <td><?php echo esc_html($note->created_at); ?></td>
-                <td>
-                    <a href="?page=tcg-admin-notes&edit=<?php echo $note->id; ?>">Edit</a> |
-                    <a href="#" class="tcg-delete" data-id="<?php echo $note->id; ?>">Delete</a>
+                        
+            <tr data-id="<?= esc_attr($note->id); ?>">
+
+                <!-- Editable title cell -->
+                <td class="tcg-edit-title" contenteditable="true" spellcheck="true">
+                    <?= esc_html($note->title); ?>
                 </td>
+            
+                <!-- Editable note cell -->
+                <td class="tcg-edit-note" contenteditable="true" spellcheck="true">
+                    <?= esc_html($note->note); ?>
+                </td>
+
+                <td><?php echo esc_html($note->created_at); ?></td>
+            
+                <!-- Actions column -->
+                <td>
+                    <button class="button button-primary tcg-save-inline">
+                        Save
+                    </button>
+            
+                    <button class="button button-link-delete tcg-delete" data-id="<?= esc_attr($note->id); ?>">
+                        Delete
+                    </button>
+                </td>
+            
             </tr>
+
         <?php endforeach; ?>
         </tbody>
     </table>
 </div>
+
+
+
