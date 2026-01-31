@@ -31,6 +31,10 @@
 
     <hr>
 
+    <form id="tcg-san-search">
+        <input type="search" name="search" placeholder="Search notes..." />
+    </form>
+
     <table class="widefat striped">
         <thead>
             <tr>
@@ -55,3 +59,4 @@
         </tbody>
     </table>
 </div>
+
