@@ -37,7 +37,7 @@ class TCG_SAN_Rest_Controller {
             'permission_callback' => [$this, 'permissions'],
         ]);
 
-        register_rest_route('tcg/v1', '/notes/(?P<id>\d+)', [
+        register_rest_route('tcg/v1', '/notes', [
             'methods'  => 'GET',
             'callback' => [$this, 'index'],
             'permission_callback' => [$this, 'permissions'],
@@ -82,4 +82,5 @@ class TCG_SAN_Rest_Controller {
         ]);
     }
 }
+
 
